@@ -12,7 +12,7 @@ d3.json("./samples.json").then(function(sampledata){
     var hover =  sampledata.samples[0].otu_labels  
     console.log(hover)
     
-  
+  //bar chart
     var trace1 = {
        
         x: sampleValues.slice(0, 10).reverse(),
@@ -33,6 +33,32 @@ d3.json("./samples.json").then(function(sampledata){
       };
       
       Plotly.newPlot("bar", data, layout);
+//bubble chart 
+ // Build a Bubble Chart using the sample data
+ var LayoutBubble = {
+    margin: { t: 0 },
+    xaxis: { title: "Id's" },
+    hovermode: "closest",
+    };
+
+    var DataBubble = [
+    {
+        y: sampleValues,
+        x:labels, 
+      text: hover,
+      mode: "markers",
+      marker: {
+        color: labels,
+        size: sampleValues,
+        }
+    }
+  ];
+
+  Plotly.plot("bubble", DataBubble, LayoutBubble);
+
+
+
+//do dropdown menu! 
 
 });
 
