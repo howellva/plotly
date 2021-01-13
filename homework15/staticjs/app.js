@@ -70,14 +70,19 @@ var selector = d3.select("#selDataset");
       .text(sample)
       .property("value", sample);
   });
+    // Use the first sample from the list to build the initial plots
+    const firstSample = sampleNames[0]; 
+    buildMetadata(firstSample)
 
-  // Use the first sample from the list to build the initial plots
-  const firstSample = sampleNames[0]; 
-  buildMetadata(firstSample)
+});
+
+
  
-
+  //Display each key-value pair from the metadata JSON object somewhere on the page.
   //Display the sample metadata, i.e., an individual's demographic information.
-  function buildMetadata(sample) {
+
+
+function buildMetadata(sample) {
     d3.json("samples.json").then((data) => {
       var metadata= data.metadata;
       var resultsarray= metadata.filter(sampleobject => sampleobject.id == sample);
@@ -92,12 +97,10 @@ var selector = d3.select("#selDataset");
   }
 
 
-
-
-});
-
-
-
+//update chart 
+function optionchanged(sample){ 
+    buildMetadata(sample)
+}
 
 
 
