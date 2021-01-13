@@ -33,23 +33,24 @@ d3.json("./samples.json").then(function(sampledata){
       };
       
       Plotly.newPlot("bar", data, layout);
-//bubble chart 
- // Build a Bubble Chart using the sample data
+
+      //bubble chart 
+
  var LayoutBubble = {
     margin: { t: 0 },
-    xaxis: { title: "Id's" },
+    xaxis: { title: "OTU Id's" },
     hovermode: "closest",
     };
 
     var DataBubble = [
     {
-        y: sampleValues,
-        x:labels, 
-      text: hover,
+        y: sampleValues, //sample values for y value
+        x:labels, //otu_ids for the x values.
+      text: hover, //labels for text value 
       mode: "markers",
       marker: {
-        color: labels,
-        size: sampleValues,
+        color: labels, //otu ids for marker color
+        size: sampleValues, //sample value for maker size
         }
     }
   ];
@@ -60,5 +61,46 @@ d3.json("./samples.json").then(function(sampledata){
 
 //do dropdown menu! 
 
+var selector = d3.select("#selDataset");
+
+  var sampleNames = sampledata.names;  //get names 
+  sampleNames.forEach((sample) => {
+    selector
+      .append("option")    //select fill 
+      .text(sample)
+      .property("value", sample);
+  });
+
+  // Use the first sample from the list to build the initial plots
+  const firstSample = sampleNames[0]; 
+  buildMetadata(firstSample)
+ 
+
+  //Display the sample metadata, i.e., an individual's demographic information.
+  function buildMetadata(sample) {
+    d3.json("samples.json").then((data) => {
+      var metadata= data.metadata;
+      var resultsarray= metadata.filter(sampleobject => sampleobject.id == sample);
+      var result= resultsarray[0]
+      var PANEL = d3.select("#sample-metadata");
+      PANEL.html("");
+      Object.entries(result).forEach(([key, value]) => {
+        PANEL.append("h6").text(`${key}: ${value}`);
+      });
+    });
+
+  }
+
+
+
+
 });
+
+
+
+
+
+
+
+
 
