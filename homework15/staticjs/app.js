@@ -12,10 +12,18 @@ d3.json("./samples.json").then(function(sampledata){
     var hover =  sampledata.samples[0].otu_labels  
     console.log(hover)
     
+  
     var trace1 = {
-        x: labels,
-        y: sampleValues,
-        type: "bar"
+       
+        x: sampleValues.slice(0, 10).reverse(),
+        y:labels.slice(0,10).map(otuID => `OTU ${otuID}`).reverse(), 
+        text: hover.slice(0,10).reverse() , 
+        mode: 'markers',
+        marker: {
+        color: 'blue'},
+        type:"bar",
+        orientation: "h", 
+    
       };
       
       var data = [trace1];
@@ -25,7 +33,6 @@ d3.json("./samples.json").then(function(sampledata){
       };
       
       Plotly.newPlot("bar", data, layout);
-      
 
 });
 
