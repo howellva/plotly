@@ -4,7 +4,7 @@ In this assignment, you will build an interactive dashboard to explore the Belly
 The dataset reveals that a small handful of microbial species (also called operational taxonomic units, or OTUs, in the study) were present in more than 70% of people, while the rest were relatively rare.
 
 ![Test Image 1](https://github.com/howellva/plotly/blob/main/homework15/Top.PNG)
-
+-----------------------------------------------------------------------------------------------------------------------
 Below are the resulting graphs:
 
 ![Test Image 2](https://github.com/howellva/plotly/blob/main/homework15/bottom.PNG)
